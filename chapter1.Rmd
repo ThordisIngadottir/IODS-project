@@ -9,5 +9,16 @@
 date()
 
 ```
-The text continues here.
+# Feelings:  
+I feel a little bit *overwhelmed* and confused in all this. I learned about this course on WebOodi. I am using Github and R for the **first time**, but I feel I am definitely making progress. Yay! 
+
+# The link:
+The link to my github repository is:   https://github.com/ThordisIngadottir/IODS-project/settings  
+and here with a linked phrase:  
+[My github repository](https://github.com/ThordisIngadottir/IODS-project/settings)  
+
+## What I want to learn from this course:
+1. I want to be able to read and understand data better.
+2. I want to be able to process data.
+
 
