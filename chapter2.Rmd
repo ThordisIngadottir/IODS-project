@@ -1,4 +1,4 @@
-# Insert chapter 2 title here
+# Thordis Ingadottir's "Project 2 in IODS, data wrangling and regression"
 
 *Describe the work you have done this week and summarize your learning.*
 
@@ -10,4 +10,22 @@
 date()
 ```
 
-Here we go again...
+## This week:
+I have been familiarising myself with R by doing the exercises in Datacamp. This included learning how to load data from the web, writing and reading locally, plotting, linear regression functions etc. This weeks project follows here:
+
+1. Load the data locally 
+```{r}
+learning2014 <- read.csv("./data/learning2014.csv", header = T, sep = ",")
+learning2014
+```
+As can be seen this loaded a dataframe with student data. The headers list 'variables':
+```{r}
+head(learning2014)
+```
+with data about the students, their grades (points) and averaged answers to different categories of questions (the variables deep, stra, and surf).
+The dimensions of the dataframe are 7 such variables, times 166 "observations", i.e. 166 students.
+```{r}
+str(learning2014)
+dim(learning2014)
+```
+
