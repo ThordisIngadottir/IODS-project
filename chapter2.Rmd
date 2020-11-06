@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Thordis Ingadottir's "Project 2 in IODS, data wrangling and regression"
 
 *Describe the work you have done this week and summarize your learning.*
@@ -13,7 +18,7 @@ date()
 ## This week:
 I have been familiarising myself with R by doing the exercises in Datacamp. This included learning how to load data from the web, writing and reading locally, plotting, linear regression functions etc. This weeks project follows here:
 
-1. Load the data locally 
+## 1. Load the data locally 
 ```{r}
 learning2014 <- read.csv("./data/learning2014.csv", header = T, sep = ",")
 learning2014
@@ -29,3 +34,13 @@ str(learning2014)
 dim(learning2014)
 ```
 
+## 2. Graphical overview of the data:
+Different ways of presenting quick overviews of the data include 'pairs' and 'ggpairs':
+```{r}
+library(GGally)
+library(ggplot2)
+# pairs(learning2014[-1])
+p <- ggpairs(learning2014, mapping = aes(col = gender, alpha = 0.3), lower = list(combo = wrap("facethist", bins = 20)))
+p
+```
+The pairs function works on my console, but in the markup file it complains about non-numeric argument being supplied to 'pairs'! Exactly the same function call. Apparently my console is more forgiving!
