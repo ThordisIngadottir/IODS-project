@@ -1,7 +1,7 @@
 ---
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 # Thordis Ingadottir's "Project 2 in IODS, data wrangling and regression"
 
@@ -23,6 +23,7 @@ I have been familiarising myself with R by doing the exercises in Datacamp. This
 learning2014 <- read.csv("./data/learning2014.csv", header = T, sep = ",")
 learning2014
 ```
+
 As can be seen this loaded a dataframe with student data. The headers list 'variables':
 ```{r}
 head(learning2014)
@@ -43,4 +44,44 @@ library(ggplot2)
 p <- ggpairs(learning2014, mapping = aes(col = gender, alpha = 0.3), lower = list(combo = wrap("facethist", bins = 20)))
 p
 ```
-The pairs function works on my console, but in the markup file it complains about non-numeric argument being supplied to 'pairs'! Exactly the same function call. Apparently my console is more forgiving!
+
+The pairs function works on my console, but in the markup file it complains about non-numeric argument being supplied to 'pairs'! Exactly the same function call. Apparently my console is more forgiving
+
+There's not an awful lot I can say about this data. In terms of correlation with points, the age is very clustered at the low end, attitude seems to have a decent correlation with points (surprise?). I can't say there seems to be much of a correlation in the question variables deep, stra, and surf, except perhaps a little for stra. Maybe we'll find out in the next section.
+
+Summary of the variables (except for gender, that isn't informative as the variable is of string type) follows:
+```{r}
+summary(learning2014$age)
+summary(learning2014$attitude)
+summary(learning2014$deep)
+summary(learning2014$stra)
+summary(learning2014$surf)
+summary(learning2014$points)
+```
+The output is self explanatory, min and max values, median and mean, and the 1st Qu. and 3rd Qu. give a very rough idea of the width of the distribution (how sharp the presumed peak at the mean).
+
+## 3. Choose three explanatory variables and fit a regression model with points as the target variable.
+I will choose attitude, stra and surf as explanatory variables (in the Datacamp these had the highest correlations with points), with points as the target variable. Create a regression model m:
+```{r}
+m <- lm(points ~ attitude + stra + surf, data = learning2014)
+summary(m)
+```
+I will refrain from too much interpretation of these model parameters. The attitude does show a good fit, with probability of 'null hypothesis' in the last column being very low. Also a low std. error. The other two variable are less impressive fits with the points, although surf seems to be the worst without doubt.
+
+## 4. Explain the relationship between the chosen explanatory variables and the target variable (interpret the model parameters).
+This was addressed above. Attitude has the best fit. It is interesting that removing the surf variable improves the fit for stra, as shown below:
+```{r}
+m2 <- lm(points ~ attitude + stra, data = learning2014)
+summary(m2)
+```
+## 5. Diagnostic plots.
+These are the diagnostic plots. They look rather similar for the three and two explanatory variables.
+```{r}
+par(mfrow = c(2,2))
+plot(m, which = c(1,2,5))
+```
+
+The residuals look reasonably random. The QQ-plot does indicate problems at both ends and the leverage plot is a little sparse to the right hand side. The model assumptions are that errors are normally distributed and independent of explanatory variable.
+
+This exercise has been very educational, as my prior statistics knowledge is not very extensive... and R seems very powerful!
+
